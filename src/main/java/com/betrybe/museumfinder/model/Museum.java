@@ -15,20 +15,6 @@ public class Museum {
   private Coordinate coordinate;
   private Long legacyId;
 
-  /**
-   * Instantiates a new Museum.
-   *
-   * @param id             the id
-   * @param name           the name
-   * @param description    the description
-   * @param address        the address
-   * @param collectionType the collection type
-   * @param subject        the subject
-   * @param url            the url
-   * @param coordinate     the coordinate
-   * @param legacyId       the legacy id
-   */
-  
   public Museum() {
   }
 
