@@ -9,7 +9,7 @@ public class InvalidCoordinateException extends RuntimeException {
    * Instantiates a new Invalid coordinate exception.
    */
   public InvalidCoordinateException() {
-
+    super("Coordenada inválida!");
   }
 
 }

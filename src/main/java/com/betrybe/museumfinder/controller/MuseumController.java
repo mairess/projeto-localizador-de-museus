@@ -6,7 +6,6 @@ import com.betrybe.museumfinder.model.Coordinate;
 import com.betrybe.museumfinder.model.Museum;
 import com.betrybe.museumfinder.service.MuseumServiceInterface;
 import com.betrybe.museumfinder.util.ModelDtoConverter;
-import jdk.jfr.Name;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
