@@ -8,7 +8,9 @@ import com.betrybe.museumfinder.service.MuseumServiceInterface;
 import com.betrybe.museumfinder.util.ModelDtoConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/museums")
 public class MuseumController {
 
-  private MuseumServiceInterface service;
+  private final MuseumServiceInterface service;
 
   /**
    * Instantiates a new Museum controller.
@@ -36,6 +38,20 @@ public class MuseumController {
   }
 
   /**
+   * Gets museum.
+   *
+   * @param id the id
+   * @return the museum
+   */
+  @GetMapping("/{id}")
+  public ResponseEntity<MuseumDto> getMuseum(@PathVariable Long id) {
+
+    Museum museum = service.getMuseum(id);
+
+    return ResponseEntity.status(HttpStatus.OK).body(ModelDtoConverter.modelToDto(museum));
+  }
+
+  /**
    * Create museum museum.
    *
    * @param newMuseum the new museum
@@ -43,8 +59,11 @@ public class MuseumController {
    */
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
-  public Museum createMuseum(@RequestBody MuseumCreationDto newMuseum) {
-    return service.createMuseum(ModelDtoConverter.dtoToModel(newMuseum));
+  public MuseumDto createMuseum(@RequestBody MuseumCreationDto newMuseum) {
+
+    Museum createdMuseum = service.createMuseum(ModelDtoConverter.dtoToModel(newMuseum));
+
+    return ModelDtoConverter.modelToDto(createdMuseum);
   }
 
   /**

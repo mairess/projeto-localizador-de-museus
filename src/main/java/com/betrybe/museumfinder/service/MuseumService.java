@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class MuseumService implements MuseumServiceInterface {
 
-  private MuseumFakeDatabase museumFakeDatabase;
+  private final MuseumFakeDatabase database;
 
   /**
    * Instantiates a new Museum service.
@@ -25,7 +25,7 @@ public class MuseumService implements MuseumServiceInterface {
   @Autowired
   public MuseumService(MuseumFakeDatabase museumFakeDatabase) {
 
-    this.museumFakeDatabase = museumFakeDatabase;
+    this.database = museumFakeDatabase;
 
   }
 
@@ -35,7 +35,7 @@ public class MuseumService implements MuseumServiceInterface {
 
     if (CoordinateUtil.isCoordinateValid(coordinate)) {
 
-      return museumFakeDatabase
+      return database
           .getClosestMuseum(coordinate, maxDistance)
           .orElseThrow(MuseumNotFoundException::new);
 
@@ -53,7 +53,7 @@ public class MuseumService implements MuseumServiceInterface {
 
     if (CoordinateUtil.isCoordinateValid(coordinate)) {
 
-      return museumFakeDatabase.saveMuseum(museum);
+      return database.saveMuseum(museum);
 
     } else {
 
@@ -65,6 +65,8 @@ public class MuseumService implements MuseumServiceInterface {
 
   @Override
   public Museum getMuseum(Long id) {
-    return null;
+
+    return database.getMuseum(id).orElseThrow(MuseumNotFoundException::new);
+
   }
 }
