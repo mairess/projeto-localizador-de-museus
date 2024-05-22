@@ -2,17 +2,16 @@ FROM maven:3-openjdk-17 as build-image
 
 WORKDIR /to-build-app
 
-COPY pom.xml .
+COPY . .
 
-RUN #./mvn dependency:go-offline
-RUN ./mvnw -DskipTests clean package
+RUN mvn -DskipTests clean package
 
 
 FROM eclipse-temurin:17-jre-alpine
 
 WORKDIR /app
 
-COPY --from=build-image /to-build-app/target/*jar app/app.jar
+COPY --from=build-image /to-build-app/target/*jar /app/app.jar
 
 EXPOSE 8080
 
