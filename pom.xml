@@ -125,6 +125,14 @@
   </build>
 
   <dependencies>
+
+    <!--For documentation -->
+    <dependency>
+      <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+      <groupId>org.springdoc</groupId>
+      <version>2.3.0</version>
+    </dependency>
+
     <!-- For REST components -->
     <dependency>
       <artifactId>spring-boot-starter-web</artifactId>
